@@ -1,0 +1,63 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TubePlayer"
+             x:Class="TubePlayer.App">
+    <Application.Resources>
+
+        <!-- Colors -->
+        <Color x:Key="PageBackgroundColor">#262626</Color>
+        <Color x:Key="DarkColor">#2F2F2F</Color>
+        <Color x:Key="LightColor">#979797</Color>
+        <Color x:Key="DarkTextColor">#151515</Color>
+        <Color x:Key="LightTextColor">#F5F5F5</Color>
+
+         <!-- Content Page Style -->
+        <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+            <Setter Property="NavigationPage.HasNavigationBar" Value="False" />
+            <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+
+        <!-- Navigation Page -->
+        <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
+            <Setter Property="BarBackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
+            <Setter Property="BarTextColor" Value="White"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+            <Setter Property="IconColor" Value="White" />
+        </Style>
+
+        <!-- Grid Styles -->
+        <Style TargetType="Grid">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="RowSpacing" Value="0" />
+            <Setter Property="ColumnSpacing" Value="0" />
+            <Setter Property="VerticalOptions" Value="Fill" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+
+        <!-- Border Styles -->
+        <Style TargetType="Border">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="VerticalOptions" Value="Fill" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+        </Style>
+
+
+        <!-- CollectionView Styles -->
+        <Style TargetType="CollectionView" ApplyToDerivedTypes="True">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="ItemSizingStrategy" Value="MeasureFirstItem" />
+            <Setter Property="VerticalOptions" Value="Fill" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Never" />
+            <Setter Property="HorizontalScrollBarVisibility" Value="Never" />
+            <Setter Property="SelectionMode" Value="None" />
+        </Style>
+    </Application.Resources>
+</Application>
+

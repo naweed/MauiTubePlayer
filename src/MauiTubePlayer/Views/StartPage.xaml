@@ -24,7 +24,8 @@
             Style="{StaticResource MediumLightText20}"
             IsVisible="{Binding DataLoaded, Mode=OneWay}"
             VerticalOptions="Center"
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"
+            Text="Data has been loaded" />
 
     </baseviews:ViewBase.PageContent>
 

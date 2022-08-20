@@ -17,7 +17,7 @@ public class StartPageViewModel : AppViewModelBase
 		{
 			await Task.Delay(5000);
 
-			throw new Exception("Unable to reach Google Youtube API Service");
+			//throw new Exception("Unable to reach Google Youtube API Service");
 
 			this.DataLoaded = true;
 		}

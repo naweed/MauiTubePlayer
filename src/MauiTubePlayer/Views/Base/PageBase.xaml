@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    ios:Page.PrefersHomeIndicatorAutoHidden="true"
+    xmlns:basecontrols="clr-namespace:MauiTubePlayer.ViewControls.Common"
+    x:Class="MauiTubePlayer.Views.Base.PageBase"
+    BackgroundColor="{StaticResource PageBackgroundColor}">
+
+    <Grid
+        IgnoreSafeArea="True">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{OnPlatform Android=16, iOS=36, Default=0}" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Error Indicator -->
+        <basecontrols:ErrorIndicator
+            Grid.Row="2"
+            IsError="{Binding IsErrorState, Mode=OneWay}"
+            ErrorImage="{Binding ErrorImage, Mode=OneWay}"
+            ErrorText="{Binding ErrorMessage, Mode=OneWay}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center" />
+
+        <!-- Grid to contain Page Content -->
+        <Grid
+            x:Name="PageContentGrid"
+            IgnoreSafeArea="True"/>
+
+         <!-- Busy Indicator -->
+        <basecontrols:LoadingIndicator
+            Grid.Row="2"
+            IsBusy="{Binding IsBusy, Mode=OneWay}"
+            LoadingText="{Binding LoadingText, Mode=OneWay}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+
+
+
+        <!-- Page Header -->
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="56,*,56"
+            Margin="0,4"
+            IgnoreSafeArea="True">
+
+            <!-- Icons for Left Side -->
+            <ImageButton
+                x:Name="HamburgerButton"
+                Source="icnhamburger.png"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                Style="{StaticResource IconButtonStyle}"
+                Grid.Column="0" />
+            <!--Clicked="HamburgerButton_Clicked"-->
+
+            <ImageButton
+                x:Name="NavigateBackButton"
+                Source="icnback.png"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                Style="{StaticResource IconButtonStyle}"
+                Grid.Column="0"
+                Command="{Binding NavigateBackCommand, Mode=OneWay}" />
+
+            <ImageButton
+                x:Name="CloseButton"
+                Source="icnclose.png"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                Style="{StaticResource IconButtonStyle}"
+                Grid.Column="0"
+                Command="{Binding CloseModalCommand, Mode=OneWay}" />
+
+            <!-- Page Header Label -->
+            <Label
+                Grid.Column="1"
+                x:Name="TitleLabel"
+                IsVisible="False"
+                VerticalOptions="Center"
+                HorizontalOptions="Fill"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                Margin="6,0,6,-1"
+                Style="{StaticResource PageHeaderTextStyle}" />
+
+            <!-- Icons for Right Side -->
+            <Grid
+                x:Name="PageIconsGrid"
+                Grid.Column="2"
+                Margin="0,4"
+                VerticalOptions="Center"
+                HorizontalOptions="End" />
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

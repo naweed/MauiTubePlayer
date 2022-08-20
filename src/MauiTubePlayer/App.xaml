@@ -12,6 +12,8 @@
         <Color x:Key="DarkTextColor">#151515</Color>
         <Color x:Key="LightTextColor">#F5F5F5</Color>
 
+        <Color x:Key="LightBorderColor">#A5A5A5</Color>
+
          <!-- Content Page Style -->
         <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
             <Setter Property="NavigationPage.HasNavigationBar" Value="False" />
@@ -58,6 +60,88 @@
             <Setter Property="HorizontalScrollBarVisibility" Value="Never" />
             <Setter Property="SelectionMode" Value="None" />
         </Style>
+
+        <!-- Icon Styles -->
+        <Style TargetType="ImageButton" x:Key="IconButtonStyle">
+            <Setter Property="HeightRequest" Value="32" />
+            <Setter Property="WidthRequest" Value="32" />
+            <Setter Property="Padding" Value="{OnPlatform Android=4, Default=6}" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="Margin" Value="12,3" />
+            <Setter Property="Aspect" Value="AspectFit" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.5" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+
+        <!-- Regular Label Styles -->
+        <Style TargetType="Label" x:Key="BaseRegularLightLabelTextStyle">
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+            <Setter Property="FontAutoScalingEnabled" Value="False" />
+            <Setter Property="FontFamily" Value="RegularFont" />
+            <Setter Property="TextColor" Value="{StaticResource LightTextColor}" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="RegularLightText16" BasedOn="{StaticResource BaseRegularLightLabelTextStyle}">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="RegularLightText14" BasedOn="{StaticResource BaseRegularLightLabelTextStyle}">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="RegularLightText12" BasedOn="{StaticResource BaseRegularLightLabelTextStyle}">
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <!-- Medium Label Style -->
+        <Style TargetType="Label" x:Key="BaseMediumLightLabelTextStyle">
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+            <Setter Property="FontAutoScalingEnabled" Value="False" />
+            <Setter Property="FontFamily" Value="MediumFont" />
+            <Setter Property="TextColor" Value="{StaticResource LightTextColor}" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="BaseMediumDarkLabelTextStyle" BasedOn="{StaticResource BaseMediumLightLabelTextStyle}">
+            <Setter Property="TextColor" Value="{StaticResource DarkTextColor}" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="MediumLightText20" BasedOn="{StaticResource BaseMediumLightLabelTextStyle}">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="MediumLightText18" BasedOn="{StaticResource BaseMediumLightLabelTextStyle}">
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="MediumLightText14" BasedOn="{StaticResource BaseMediumLightLabelTextStyle}">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <Style TargetType="Label" x:Key="MediumLightText10" BasedOn="{StaticResource BaseMediumLightLabelTextStyle}">
+            <Setter Property="FontSize" Value="10" />
+        </Style>
+
+        <!-- Page Header Style -->
+        <Style TargetType="Label" x:Key="PageHeaderTextStyle" BasedOn="{StaticResource BaseMediumLightLabelTextStyle}">
+            <Setter Property="FontSize" Value="22" />
+        </Style>
+
 
     </Application.Resources>
 </Application>

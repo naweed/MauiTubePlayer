@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VerticalStackLayout
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MauiTubePlayer.ViewControls.Common.LoadingIndicator"
+    IsVisible="False"
+    Padding="48,12"
+    Spacing="4">
+
+    <ActivityIndicator
+        x:Name="actIndicator"
+        IsRunning="False"
+        WidthRequest="44"
+        HeightRequest="44"
+        HorizontalOptions="Center"
+        Color="{StaticResource LightColor}"
+        Scale="{OnPlatform iOS=1.3, Android=1.0}" />
+
+    <Label
+        x:Name="lblLoadingText"
+        Style="{StaticResource RegularLightText14}"
+        LineBreakMode="WordWrap"
+        HorizontalOptions="Center"
+        HorizontalTextAlignment="Center" />
+
+</VerticalStackLayout>
+

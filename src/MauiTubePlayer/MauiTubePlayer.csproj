@@ -56,6 +56,7 @@
 	  <None Remove="ViewControls\" />
 	  <None Remove="Views\Base\" />
 	  <None Remove="ViewModels\Base\" />
+	  <None Remove="ViewControls\Common\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
@@ -72,9 +73,19 @@
 	  <Folder Include="ViewControls\" />
 	  <Folder Include="Views\Base\" />
 	  <Folder Include="ViewModels\Base\" />
+	  <Folder Include="ViewControls\Common\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="Views\StartPage.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="ViewControls\Common\ErrorIndicator.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="ViewControls\Common\LoadingIndicator.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Base\PageBase.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
 	</ItemGroup>

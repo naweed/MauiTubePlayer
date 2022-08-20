@@ -1,10 +1,4 @@
-﻿
-using System.Net;
-using Maui.Apps.Framework.Services;
-using MauiTubePlayer.IServices;
-using MonkeyCache;
-
-namespace MauiTubePlayer.Services;
+﻿namespace MauiTubePlayer.Services;
 
 public class YoutubeService : RestServiceBase, IApiService
 {

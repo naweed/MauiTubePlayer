@@ -1,7 +1,4 @@
-﻿
-
-
-namespace Maui.Apps.Framework.MVVM;
+﻿namespace Maui.Apps.Framework.MVVM;
 
 public partial class ViewModelBase : ObservableObject
 {

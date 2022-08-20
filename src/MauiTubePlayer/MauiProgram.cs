@@ -1,19 +1,17 @@
-﻿using Microsoft.Maui.LifecycleEvents;
-
-namespace MauiTubePlayer;
+﻿namespace MauiTubePlayer;
 
 public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("FiraSans-Light.ttf", "RegularFont");
-				fonts.AddFont("FiraSans-Medium.ttf", "MediumFont");
-			})
+        builder
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("FiraSans-Light.ttf", "RegularFont");
+                fonts.AddFont("FiraSans-Medium.ttf", "MediumFont");
+            })
             .ConfigureLifecycleEvents(events =>
             {
 #if ANDROID
@@ -28,10 +26,29 @@ public static class MauiProgram
                     activity.Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
                 }
 #endif
-            })
-;
+            });
+
+        //Register Services
+        RegisterAppServices(builder.Services);
 
         return builder.Build();
 	}
+
+    private static void RegisterAppServices(IServiceCollection services)
+    {
+        //Add Platform specific Dependencies
+        services.AddSingleton<IConnectivity>(Connectivity.Current);
+
+        //Register Cache Barrel
+        Barrel.ApplicationId = Constants.ApplicationId;
+        services.AddSingleton<IBarrel>(Barrel.Current);
+
+
+        //Register API Service
+        services.AddSingleton<IApiService, YoutubeService>();
+
+        //Register View Models
+        services.AddSingleton<StartPageViewModel>();
+    }
 }
 

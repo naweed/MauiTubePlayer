@@ -31,7 +31,7 @@
             x:Name="PageContentGrid"
             IgnoreSafeArea="True"/>
 
-         <!-- Busy Indicator -->
+        <!-- Busy Indicator -->
         <basecontrols:LoadingIndicator
             Grid.Row="2"
             IsBusy="{Binding IsBusy, Mode=OneWay}"

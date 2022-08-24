@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:baseviews="clr-namespace:MauiTubePlayer.Views.Base"
     xmlns:viewmodels="clr-namespace:MauiTubePlayer.ViewModels"
+    xmlns:models="clr-namespace:MauiTubePlayer.Models"
+    xmlns:controls="clr-namespace:MauiTubePlayer.ViewControls"
     x:Class="MauiTubePlayer.Views.StartPage"
     x:TypeArguments="viewmodels:StartPageViewModel"
     x:DataType="viewmodels:StartPageViewModel"
@@ -15,17 +17,44 @@
     <baseviews:ViewBase.PageIcons>
         <ImageButton
             Style="{StaticResource IconButtonStyle}"
-            Source="icnsettings.png" />
+            Source="icnsettings.png"
+            Command="{Binding OpenSettingPageCommand, Mode=OneWay}" />
     </baseviews:ViewBase.PageIcons>
 
     <baseviews:ViewBase.PageContent>
 
-        <Label
-            Style="{StaticResource MediumLightText20}"
-            IsVisible="{Binding DataLoaded, Mode=OneWay}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Text="Data has been loaded" />
+        <CollectionView
+            x:Name="lstVideos"
+            Margin="16,4,16,0"
+            ItemsSource="{Binding YoutubeVideos, Mode=OneWay}">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="12" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.Header>
+                <ContentView>
+                    <Label
+                        Text="Search box will appear here"
+                        Style="{StaticResource RegularLightText16}" />
+
+                </ContentView>
+            </CollectionView.Header>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="models:YoutubeVideo">
+
+                    <controls:VideoCell
+                        HorizontalOptions="Fill"
+                        HeightRequest="{Binding ItemsHeight, Source={x:Reference RootPage}}"/>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
 
     </baseviews:ViewBase.PageContent>
 

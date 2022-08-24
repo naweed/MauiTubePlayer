@@ -16,3 +16,5 @@ global using System.Net;
 global using Maui.Apps.Framework.Services;
 global using MauiTubePlayer.Views.Base;
 global using Maui.Apps.Framework.Exceptions;
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using System.Collections.ObjectModel;

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MauiTubePlayer.Models"
+    x:DataType="models:YoutubeVideo"
+    x:Name="VideoCellRoot"
+    x:Class="MauiTubePlayer.ViewControls.VideoCell">
+
+    <Border
+        BackgroundColor="{StaticResource DarkColor}"
+        StrokeShape="RoundRectangle 12"
+        Padding="6">
+
+        <Grid
+            RowSpacing="12"
+            RowDefinitions="*,Auto">
+
+            <!-- Thumbnail -->
+            <Frame
+                Grid.Row="0"
+                HasShadow="True"
+                CornerRadius="8"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                IsClippedToBounds="True"
+                Padding="0"
+                Margin="0,0,2,2">
+                <Image
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    Aspect="AspectFill">
+                    <Image.Source>
+                        <UriImageSource
+                            Uri="{Binding Snippet.Thumbnails.High.Url, Mode=OneWay}"
+                            CacheValidity="1:00:00.0" />
+                    </Image.Source>
+                </Image>
+            </Frame>
+
+            <!-- Video Details -->
+            <Grid
+                Grid.Row="1"
+                ColumnSpacing="12"
+                ColumnDefinitions="Auto,*,Auto"
+                RowDefinitions="Auto,Auto">
+
+                <!-- Channel Pic -->
+                <Border
+                    WidthRequest="36"
+                    HeightRequest="36"
+                    VerticalOptions="Center"
+                    Stroke="{StaticResource LightBorderColor}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 18"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0">
+
+                    <Image
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        WidthRequest="32"
+                        HeightRequest="32">
+
+                        <Image.Clip>
+                            <EllipseGeometry
+                                Center="16,16"
+                                RadiusX="16"
+                                RadiusY="16"/>
+                        </Image.Clip>
+
+                        <Image.Source>
+                            <UriImageSource
+                                Uri="{Binding Snippet.ChannelImageURL, Mode=OneWay}"
+                                CacheValidity="1:00:00.0" />
+                        </Image.Source>
+                    </Image>
+
+                </Border>
+
+
+                <!-- Channel Name -->
+                <Label
+                    Style="{StaticResource MediumLightText18}"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding Snippet.ChannelTitle, Mode=OneWay}" />
+
+                <!-- Video Title -->
+                <Label
+                    Style="{StaticResource RegularLightText14}"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding Snippet.Title, Mode=OneWay}" />
+
+                <!-- Next Arrow -->
+                <Image
+                    Source="imgarrow.png"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="2"
+                    WidthRequest="32"
+                    HeightRequest="32"
+                    Aspect="AspectFill"
+                    VerticalOptions="Center" />
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
+
+
+</ContentView>
+

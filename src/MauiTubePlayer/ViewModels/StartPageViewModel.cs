@@ -1,26 +1,41 @@
-﻿namespace MauiTubePlayer.ViewModels;
+﻿using Maui.Apps.Framework.Extensions;
 
-public class StartPageViewModel : AppViewModelBase
+namespace MauiTubePlayer.ViewModels;
+
+public partial class StartPageViewModel : AppViewModelBase
 {
-	public StartPageViewModel(IApiService appApiService) : base(appApiService)
+    private string nextToken = string.Empty;
+    private string searchTerm = "iPhone 14";
+
+    [ObservableProperty]
+    private ObservableCollection<YoutubeVideo> youtubeVideos;
+
+
+    public StartPageViewModel(IApiService appApiService) : base(appApiService)
 	{
 		this.Title = "TUBE PLAYER";
 	}
 
     public override async void OnNavigatedTo(object parameters)
     {
-		SetDataLodingIndicators(true);
+        Search();
+    }
 
-		LoadingText = "Hold on, we are loading";
+    private async void Search()
+    {
+        SetDataLodingIndicators(true);
 
-		try
-		{
-			await Task.Delay(5000);
+        LoadingText = "Hold on while we search for Youtube videos...";
 
-			//throw new Exception("Unable to reach Google Youtube API Service");
+        YoutubeVideos = new();
 
-			this.DataLoaded = true;
-		}
+        try
+        {
+            //Search for videos
+            await GetYouTubeVideo();
+
+            this.DataLoaded = true;
+        }
         catch (InternetConnectionException iex)
         {
             this.IsErrorState = true;
@@ -35,8 +50,36 @@ public class StartPageViewModel : AppViewModelBase
         }
         finally
         {
-			SetDataLodingIndicators(false);
-		}
+            SetDataLodingIndicators(false);
+        }
+    }
+
+    private async Task GetYouTubeVideo()
+    {
+        //Search the videos
+        var videoSearchResult = await _appApiService.SearchVideos(searchTerm, nextToken);
+
+        nextToken = videoSearchResult.NextPageToken;
+
+        //Get Channel URLs
+        var channelIDs = string.Join(",",
+            videoSearchResult.Items.Select(video => video.Snippet.ChannelId).Distinct());
+
+        var channelSearchResult = await _appApiService.GetChannels(channelIDs);
+
+        //Set Channel URL in the Video
+        videoSearchResult.Items.ForEach(video =>
+            video.Snippet.ChannelImageURL = channelSearchResult.Items.Where(channel =>
+                channel.Id == video.Snippet.ChannelId).First().Snippet.Thumbnails.High.Url);
+
+        //Add the Videos for Display
+        YoutubeVideos.AddRange(videoSearchResult.Items);
+    }
+
+    [RelayCommand]
+    private async void OpenSettingPage()
+    {
+        await PageService.DisplayAlert("Setting", "This implemention is outside the scope of this course.", "Got it!");
     }
 }
 

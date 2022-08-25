@@ -1,6 +1,4 @@
-﻿
-
-namespace MauiTubePlayer.IServices;
+﻿namespace MauiTubePlayer.IServices;
 
 public interface IApiService
 {

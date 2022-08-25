@@ -18,3 +18,4 @@ global using MauiTubePlayer.Views.Base;
 global using Maui.Apps.Framework.Exceptions;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using System.Collections.ObjectModel;
+global using Maui.Apps.Framework.Extensions;

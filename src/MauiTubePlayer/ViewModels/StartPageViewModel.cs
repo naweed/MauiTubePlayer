@@ -1,6 +1,4 @@
-﻿using Maui.Apps.Framework.Extensions;
-
-namespace MauiTubePlayer.ViewModels;
+﻿namespace MauiTubePlayer.ViewModels;
 
 public partial class StartPageViewModel : AppViewModelBase
 {

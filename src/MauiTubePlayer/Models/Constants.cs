@@ -1,5 +1,4 @@
-﻿
-namespace MauiTubePlayer.Models;
+﻿namespace MauiTubePlayer.Models;
 
 public static class Constants
 {

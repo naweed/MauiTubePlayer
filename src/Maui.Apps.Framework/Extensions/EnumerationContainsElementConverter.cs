@@ -1,5 +1,4 @@
-﻿
-namespace Maui.Apps.Framework.Extensions;
+﻿namespace Maui.Apps.Framework.Extensions;
 
 public class EnumerationContainsElementConverter : IValueConverter
 {

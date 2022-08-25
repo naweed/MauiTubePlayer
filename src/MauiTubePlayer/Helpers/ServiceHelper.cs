@@ -1,10 +1,9 @@
-﻿
-namespace MauiTubePlayer.Helpers;
+﻿namespace MauiTubePlayer.Helpers;
 
 public static class ServiceHelpers
 {
 
-    public static TService GetService<TService>() =>
+    public static TService GetService<TService>() => //test
         Current.GetService<TService>();
 
     public static IServiceProvider Current =>

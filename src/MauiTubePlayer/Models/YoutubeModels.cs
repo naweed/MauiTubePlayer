@@ -1,7 +1,4 @@
-﻿
-
-
-namespace MauiTubePlayer.Models;
+﻿namespace MauiTubePlayer.Models;
 
 
 public class VideoSearchResult

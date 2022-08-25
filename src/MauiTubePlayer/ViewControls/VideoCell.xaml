@@ -12,6 +12,12 @@
         StrokeShape="RoundRectangle 12"
         Padding="6">
 
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding Path=ParentContext.NavigateToVideoDetailsPageCommand, Source={x:Reference VideoCellRoot}, Mode=OneWay}"
+                CommandParameter="{Binding Id.VideoId}" />
+        </Border.GestureRecognizers>
+
         <Grid
             RowSpacing="12"
             RowDefinitions="*,Auto">

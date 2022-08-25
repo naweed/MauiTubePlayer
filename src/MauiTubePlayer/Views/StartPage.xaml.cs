@@ -27,4 +27,9 @@ public partial class StartPage : ViewBase<StartPageViewModel>
 
         ItemsHeight = 60d + (width - lstVideos.Margin.Right - lstVideos.Margin.Left) / 1.8d;
     }
+
+    async void txtSearchQuery_Completed(System.Object sender, System.EventArgs e)
+    {
+        ViewModel.SearchVideosCommand.Execute(txtSearchQuery.Text);
+    }
 }

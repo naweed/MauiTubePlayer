@@ -8,6 +8,9 @@ public partial class StartPageViewModel : AppViewModelBase
     [ObservableProperty]
     private ObservableCollection<YoutubeVideo> youtubeVideos;
 
+    [ObservableProperty]
+    private bool isLoadingMore;
+
 
     public StartPageViewModel(IApiService appApiService) : base(appApiService)
 	{
@@ -16,10 +19,10 @@ public partial class StartPageViewModel : AppViewModelBase
 
     public override async void OnNavigatedTo(object parameters)
     {
-        Search();
+        await Search();
     }
 
-    private async void Search()
+    private async Task Search()
     {
         SetDataLodingIndicators(true);
 
@@ -30,7 +33,7 @@ public partial class StartPageViewModel : AppViewModelBase
         try
         {
             //Search for videos
-            await GetYouTubeVideo();
+            await GetYouTubeVideos();
 
             this.DataLoaded = true;
         }
@@ -52,7 +55,7 @@ public partial class StartPageViewModel : AppViewModelBase
         }
     }
 
-    private async Task GetYouTubeVideo()
+    private async Task GetYouTubeVideos()
     {
         //Search the videos
         var videoSearchResult = await _appApiService.SearchVideos(searchTerm, nextToken);
@@ -79,5 +82,33 @@ public partial class StartPageViewModel : AppViewModelBase
     {
         await PageService.DisplayAlert("Setting", "This implemention is outside the scope of this course.", "Got it!");
     }
+
+    [RelayCommand]
+    private async Task LoadMoreVideos()
+    {
+        if (IsLoadingMore || string.IsNullOrEmpty(nextToken))
+            return;
+
+        IsLoadingMore = true;
+        await Task.Delay(2000);
+        await GetYouTubeVideos();
+        IsLoadingMore = false;
+    }
+
+    [RelayCommand]
+    private async Task SearchVideos(string searchQuery)
+    {
+        nextToken = string.Empty;
+        searchTerm = searchQuery.Trim();
+
+        await Search();
+    }
+
+    [RelayCommand]
+    private async Task NavigateToVideoDetailsPage(string videoID)
+    {
+        await NavigationService.PushAsync(new VideoDetailsPage(videoID));
+    }
+
 }
 

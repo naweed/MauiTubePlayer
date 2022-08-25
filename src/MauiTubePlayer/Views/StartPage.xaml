@@ -26,7 +26,9 @@
         <CollectionView
             x:Name="lstVideos"
             Margin="16,4,16,0"
-            ItemsSource="{Binding YoutubeVideos, Mode=OneWay}">
+            ItemsSource="{Binding YoutubeVideos, Mode=OneWay}"
+            RemainingItemsThreshold="1"
+            RemainingItemsThresholdReachedCommand="{Binding LoadMoreVideosCommand, Mode=OneWay}">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout
@@ -36,9 +38,56 @@
 
             <CollectionView.Header>
                 <ContentView>
-                    <Label
-                        Text="Search box will appear here"
-                        Style="{StaticResource RegularLightText16}" />
+
+                    <Border
+                        Padding="12,4"
+                        BackgroundColor="{StaticResource DarkColor}"
+                        Stroke="Transparent"
+                        HorizontalOptions="Fill"
+                        Margin="0,0,0,12"
+                        HeightRequest="40"
+                        StrokeShape="RoundRectangle 8">
+
+                        <Grid
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Center"
+                            ColumnDefinitions="*,Auto"
+                            ColumnSpacing="16">
+
+                            <Image
+                                WidthRequest="18"
+                                HeightRequest="18"
+                                Source="icnsearch.png"
+                                Grid.Column="1"
+                                VerticalOptions="Center">
+
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding SearchVideosCommand}"
+                                        CommandParameter="{Binding Path=Text, Source={x:Reference txtSearchQuery}, Mode=OneWay}" />
+
+                                </Image.GestureRecognizers>
+
+                            </Image>
+
+                            <Entry
+                                x:Name="txtSearchQuery"
+                                Placeholder="Search..."
+                                PlaceholderColor="{StaticResource LightColor}"
+                                Grid.Column="0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Fill"
+                                BackgroundColor="Transparent"
+                                FontFamily="RegularFont"
+                                FontSize="16"
+                                TextColor="{StaticResource LightTextColor}"
+                                VerticalTextAlignment="Center"
+                                Completed="txtSearchQuery_Completed"
+                                />
+
+                        </Grid>
+
+                    </Border>
 
                 </ContentView>
             </CollectionView.Header>
@@ -48,11 +97,26 @@
                     x:DataType="models:YoutubeVideo">
 
                     <controls:VideoCell
+                        ParentContext="{Binding BindingContext, Source={x:Reference RootPage}}"
                         HorizontalOptions="Fill"
                         HeightRequest="{Binding ItemsHeight, Source={x:Reference RootPage}}"/>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+
+            <!-- Load More Indicator -->
+            <CollectionView.Footer>
+                <ContentView
+                    HeightRequest="56">
+                    <ActivityIndicator
+                        IsRunning="{Binding IsLoadingMore, Mode=OneWay}"
+                        WidthRequest="44"
+                        HeightRequest="44"
+                        HorizontalOptions="Center"
+                        Color="White"
+                        Scale="{OnPlatform iOS=1.3, Android=1.0}" />
+                </ContentView>
+            </CollectionView.Footer>
 
         </CollectionView>
 

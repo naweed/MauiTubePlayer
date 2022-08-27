@@ -1,12 +1,99 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiTubePlayer.Views.VideoDetailsPage"
-             Title="VideoDetailsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentPage>
+<baseviews:ViewBase
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:baseviews="clr-namespace:MauiTubePlayer.Views.Base"
+    xmlns:viewmodels="clr-namespace:MauiTubePlayer.ViewModels"
+    xmlns:models="clr-namespace:MauiTubePlayer.Models"
+    xmlns:controls="clr-namespace:MauiTubePlayer.ViewControls"
+    x:Class="MauiTubePlayer.Views.VideoDetailsPage"
+    x:TypeArguments="viewmodels:VideoDetailsPageViewModel"
+    x:DataType="viewmodels:VideoDetailsPageViewModel"
+    PageTitle="{Binding Title, Mode=OneWay}"
+    PageMode="Navigate"
+    ContentDisplayMode="NavigationBar"
+    x:Name="RootPage">
+
+    <baseviews:ViewBase.PageContent>
+
+        <Grid
+            RowDefinitions="160,Auto,Auto,Auto,Auto,Auto,*,56"
+            RowSpacing="12"
+            Margin="16,0"
+            IsVisible="{Binding DataLoaded, Mode=OneWay}"
+            IgnoreSafeArea="True">
+
+            <!-- Top are aith Poster -->
+            <Frame
+                HasShadow="True"
+                CornerRadius="8"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                IsClippedToBounds="True"
+                Padding="0"
+                Grid.Row="0"
+                x:Name="HeaderView">
+
+                <Grid
+                    IsClippedToBounds="True"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill">
+
+                    <!-- Poster Image -->
+                    <Image
+                        VerticalOptions="Fill"
+                        HorizontalOptions="Fill"
+                        Aspect="AspectFill"
+                        Margin="0">
+                        <Image.Source>
+                            <UriImageSource
+                                Uri="{Binding TheVideo.Snippet.Thumbnails.High.Url, Mode=OneWay}"
+                                CacheValidity="1:00:00.0" />
+                        </Image.Source>
+                    </Image>
+
+                    <!-- Duration -->
+                    <Border
+                        Padding="8"
+                        VerticalOptions="End"
+                        HorizontalOptions="End"
+                        Margin="8"
+                        Stroke="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 4"
+                        BackgroundColor="{StaticResource DarkColor}">
+                        <Label
+                            Text="{Binding TheVideo.VideoDuration, Mode=OneWay}"
+                            Style="{StaticResource MediumLightText10}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center"/>
+                    </Border>
+
+                </Grid>
+
+            </Frame>
+
+            <!-- Video Title -->
+            <VerticalStackLayout
+                x:Name="VideoTitle"
+                Grid.Row="1"
+                HorizontalOptions="Fill"
+                Spacing="2">
+
+                <Label
+                    Style="{StaticResource MediumLightText20}"
+                    Text="{Binding TheVideo.Snippet.Title, Mode=OneWay}" />
+
+                <Label
+                    Style="{StaticResource RegularLightText14}"
+                    Text="{Binding TheVideo.VideoSubtitle, Mode=OneWay}" />
+
+            </VerticalStackLayout>
+
+
+
+        </Grid>
+
+    </baseviews:ViewBase.PageContent>
+
+</baseviews:ViewBase>

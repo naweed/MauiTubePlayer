@@ -7,6 +7,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCompatibility()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("FiraSans-Light.ttf", "RegularFont");
@@ -26,6 +27,12 @@ public static class MauiProgram
                     activity.Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
                 }
 #endif
+            }).ConfigureMauiHandlers(handlers =>
+            {
+                //Add Legacy MediaElement Renderer
+                handlers.AddCompatibilityRenderer(
+                    typeof(Xamarin.CommunityToolkit.UI.Views.MediaElement),
+                    typeof(Xamarin.CommunityToolkit.UI.Views.MediaElementRenderer));
             });
 
         //Register Services

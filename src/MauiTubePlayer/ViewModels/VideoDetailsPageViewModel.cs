@@ -16,6 +16,11 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
 
     public event EventHandler DownloadCompleted;
 
+    [ObservableProperty]
+    private string videoSource;
+
+    private IEnumerable<MuxedStreamInfo> streamInfo;
+
 
     public VideoDetailsPageViewModel(IApiService appApiService) : base(appApiService)
     {
@@ -53,6 +58,10 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
             //Get Comments
             var commentsSearchResult = await _appApiService.GetComments(videoID);
             Comments = commentsSearchResult.Items;
+
+
+            //Get Stream URL
+            await GetVideoURL();
 
 
             //Raise Data Load completed event to the UI
@@ -121,6 +130,21 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
         await NavigationService.PushAsync(new VideoDetailsPage(videoID));
     }
 
+    private async Task GetVideoURL()
+    {
+        var youtube = new YoutubeClient();
+
+        var streamManifest = await youtube.Videos.Streams.GetManifestAsync(
+            $"https://youtube.com/watch?v={TheVideo.Id}"
+        );
+
+        // Get highest quality muxed stream
+        streamInfo = streamManifest.GetMuxedStreams();
+
+        var videoPlayerStream = streamInfo.First(video => video.VideoQuality.Label is "240p" or "360p" or "480p");
+
+        VideoSource = videoPlayerStream.Url;
+    }
 
 }
 

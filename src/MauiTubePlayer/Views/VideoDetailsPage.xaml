@@ -6,7 +6,9 @@
     xmlns:viewmodels="clr-namespace:MauiTubePlayer.ViewModels"
     xmlns:models="clr-namespace:MauiTubePlayer.Models"
     xmlns:controls="clr-namespace:MauiTubePlayer.ViewControls"
+    xmlns:botshtcontrols="clr-namespace:XGENO.Maui.Controls;assembly=Maui.Controls.BottomSheet"
     xmlns:converters="clr-namespace:Maui.Apps.Framework.Converters;assembly=Maui.Apps.Framework"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:Class="MauiTubePlayer.Views.VideoDetailsPage"
     x:TypeArguments="viewmodels:VideoDetailsPageViewModel"
     x:DataType="viewmodels:VideoDetailsPageViewModel"
@@ -58,6 +60,15 @@
                         </Image.Source>
                     </Image>
 
+                    <!-- Play Button -->
+                    <ImageButton
+                        Source="imgplay.png"
+                        HeightRequest="64"
+                        WidthRequest="64"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="VideoPlayerButton_Clicked"/>
+
                     <!-- Duration -->
                     <Border
                         Padding="8"
@@ -74,6 +85,17 @@
                             VerticalOptions="Center"
                             VerticalTextAlignment="Center"/>
                     </Border>
+
+                    <!-- Media Player -->
+                    <xct:MediaElement
+                        x:Name="VideoPlayer"
+                        IsVisible="False"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        ShowsPlaybackControls="True"
+                        AutoPlay="False"
+                        Source="{Binding VideoSource, Mode=OneWay}" />
+
 
                 </Grid>
 
@@ -351,7 +373,114 @@
                 FontFamily="MediumFont"
                 BorderColor="{StaticResource LightBorderColor}"
                 BorderWidth="0.5"
-                Background="{StaticResource DarkColor}"/>
+                Background="{StaticResource DarkColor}"
+                Clicked="btnComments_Clicked"/>
+
+
+            <!-- Comments Sheet -->
+            <botshtcontrols:BottomSheet
+                Margin="-16,0"
+                x:Name="CommentsBottomSheet"
+                Grid.Row="0"
+                Grid.RowSpan="8"
+                HeaderText="{Binding TheVideo.CommentsCount, Mode=OneWay, StringFormat='COMMENTS ({0})'}"
+                HeaderStyle="{StaticResource PageHeaderTextStyle}"
+                SheetHeight="660"
+                Theme="Dark">
+                <botshtcontrols:BottomSheet.BottomSheetContent>
+
+                    <CollectionView
+                        ItemsSource="{Binding Comments, Mode=OneWay}"
+                        ItemSizingStrategy="MeasureAllItems">
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout
+                                Orientation="Vertical"
+                                ItemSpacing="12" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate
+                                x:DataType="models:Comment">
+                                <Border
+                                    BackgroundColor="{StaticResource DarkColor}"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="16"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="FillAndExpand">
+
+                                    <Grid
+                                        RowDefinitions="Auto,*"
+                                        ColumnDefinitions="32,*,Auto"
+                                        VerticalOptions="FillAndExpand"
+                                        RowSpacing="6"
+                                        ColumnSpacing="12"
+                                        BackgroundColor="{StaticResource DarkColor}">
+
+                                         <Border
+                                            WidthRequest="32"
+                                            HeightRequest="32"
+                                            VerticalOptions="Start"
+                                            Stroke="{StaticResource LightBorderColor}"
+                                            StrokeThickness="1"
+                                            StrokeShape="RoundRectangle 16"
+                                            Grid.Row="0"
+                                            Grid.RowSpan="2"
+                                            Grid.Column="0">
+
+                                            <Image
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center"
+                                                WidthRequest="30"
+                                                HeightRequest="30">
+
+                                                <Image.Clip>
+                                                    <EllipseGeometry
+                                                        Center="15,15"
+                                                        RadiusX="15"
+                                                        RadiusY="15"/>
+                                                </Image.Clip>
+
+                                                <Image.Source>
+                                                    <UriImageSource
+                                                        Uri="{Binding Snippet.TopLevelComment.Snippet.AuthorProfileImageUrl, Mode=OneWay}"
+                                                        CacheValidity="1:00:00.0" />
+                                                </Image.Source>
+                                            </Image>
+
+                                        </Border>
+
+                                        <Label
+                                            Text="{Binding Snippet.TopLevelComment.Snippet.AuthorDisplayName, Mode=OneWay}"
+                                            Style="{StaticResource MediumLightText14}"
+                                            Grid.Row="0"
+                                            Grid.Column="1" />
+
+                                        <Label
+                                            Text="{Binding Snippet.TopLevelComment.Snippet.PublishedAt, Mode=OneWay, StringFormat='{0:dd-MMM-yyyy}'}"
+                                            Style="{StaticResource RegularLightText12}"
+                                            Grid.Row="0"
+                                            Grid.Column="2" />
+
+                                        <Label
+                                            Text="{Binding Snippet.TopLevelComment.Snippet.TextDisplay, Mode=OneWay}"
+                                            Style="{StaticResource RegularLightText12}"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="2"
+                                            LineBreakMode="WordWrap"
+                                            VerticalOptions="Start" />
+
+                                    </Grid>
+
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+                </botshtcontrols:BottomSheet.BottomSheetContent>
+            </botshtcontrols:BottomSheet>              
 
         </Grid>
 

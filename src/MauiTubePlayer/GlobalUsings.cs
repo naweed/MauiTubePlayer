@@ -19,3 +19,6 @@ global using Maui.Apps.Framework.Exceptions;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using System.Collections.ObjectModel;
 global using Maui.Apps.Framework.Extensions;
+global using Microsoft.Maui.Controls.Compatibility.Hosting;
+global using YoutubeExplode;
+global using YoutubeExplode.Videos.Streams;

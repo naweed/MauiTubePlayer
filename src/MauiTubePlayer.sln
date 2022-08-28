@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiTubePlayer", "MauiTubeP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.Apps.Framework", "Maui.Apps.Framework\Maui.Apps.Framework.csproj", "{2CB3A55A-9FDB-44C5-9231-04D216E4722C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.Controls.BottomSheet", "Maui.Controls.BottomSheet\Maui.Controls.BottomSheet.csproj", "{647D02F1-4DA9-4F64-B853-21C541F1F80E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{2CB3A55A-9FDB-44C5-9231-04D216E4722C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CB3A55A-9FDB-44C5-9231-04D216E4722C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CB3A55A-9FDB-44C5-9231-04D216E4722C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{647D02F1-4DA9-4F64-B853-21C541F1F80E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{647D02F1-4DA9-4F64-B853-21C541F1F80E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{647D02F1-4DA9-4F64-B853-21C541F1F80E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{647D02F1-4DA9-4F64-B853-21C541F1F80E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

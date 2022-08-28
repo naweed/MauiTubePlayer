@@ -57,10 +57,14 @@
 	  <None Remove="Views\Base\" />
 	  <None Remove="ViewModels\Base\" />
 	  <None Remove="ViewControls\Common\" />
+	  <None Remove="Xamarin.CommunityToolkit.MauiCompat" />
+	  <None Remove="YoutubeExplode" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	  <PackageReference Include="MonkeyCache.FileStore" Version="2.0.0-beta" />
+	  <PackageReference Include="Xamarin.CommunityToolkit.MauiCompat" Version="2.0.2-preview1013" />
+	  <PackageReference Include="YoutubeExplode" Version="6.2.1" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Helpers\" />
@@ -100,5 +104,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Maui.Apps.Framework\Maui.Apps.Framework.csproj" />
+	  <ProjectReference Include="..\Maui.Controls.BottomSheet\Maui.Controls.BottomSheet.csproj" />
 	</ItemGroup>
 </Project>

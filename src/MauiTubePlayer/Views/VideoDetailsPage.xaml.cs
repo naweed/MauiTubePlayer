@@ -16,6 +16,13 @@ public partial class VideoDetailsPage : ViewBase<VideoDetailsPageViewModel>
     {
         (this.BindingContext as VideoDetailsPageViewModel).DownloadCompleted -= VideoDetailsPage_DownloadCompleted;
 
+        try
+        {
+            VideoPlayer.Stop();
+        }
+        catch { }
+
+
         base.OnDisappearing();
     }
 
@@ -73,5 +80,14 @@ public partial class VideoDetailsPage : ViewBase<VideoDetailsPageViewModel>
                 //Action to perform on completion (if any)
             });
 
+    }
+
+    async void btnComments_Clicked(System.Object sender, System.EventArgs e) =>
+        await CommentsBottomSheet.OpenBottomSheet();
+
+    void VideoPlayerButton_Clicked(System.Object sender, System.EventArgs e)
+    {
+        VideoPlayer.IsVisible = true;
+        VideoPlayer.Play();
     }
 }

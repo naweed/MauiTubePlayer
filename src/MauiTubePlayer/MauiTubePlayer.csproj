@@ -94,6 +94,9 @@
 	  <MauiXaml Update="Views\VideoDetailsPage.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
+	  <MauiXaml Update="ViewControls\SmallVideoCell.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Maui.Apps.Framework\Maui.Apps.Framework.csproj" />

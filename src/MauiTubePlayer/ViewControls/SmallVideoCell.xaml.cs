@@ -1,8 +1,8 @@
 ﻿namespace MauiTubePlayer.ViewControls;
 
-public partial class VideoCell : ContentView
+public partial class SmallVideoCell : ContentView
 {
-    public VideoCell()
+	public SmallVideoCell()
 	{
 		InitializeComponent();
 	}

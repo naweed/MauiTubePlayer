@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:MauiTubePlayer.Models"
+    xmlns:viewmodels="clr-namespace:MauiTubePlayer.ViewModels"
     x:DataType="models:YoutubeVideo"
     x:Name="VideoCellRoot"
     x:Class="MauiTubePlayer.ViewControls.VideoCell">
@@ -14,7 +15,7 @@
 
         <Border.GestureRecognizers>
             <TapGestureRecognizer
-                Command="{Binding Path=ParentContext.NavigateToVideoDetailsPageCommand, Source={x:Reference VideoCellRoot}, Mode=OneWay}"
+                Command="{Binding Path=NavigateToVideoDetailsPageCommand, Source={RelativeSource AncestorType={x:Type viewmodels:StartPageViewModel}}, Mode=OneWay}"
                 CommandParameter="{Binding Id.VideoId}" />
         </Border.GestureRecognizers>
 

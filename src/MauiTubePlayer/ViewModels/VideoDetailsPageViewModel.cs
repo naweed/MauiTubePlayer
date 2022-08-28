@@ -12,9 +12,6 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
     private Channel theChannel;
 
     [ObservableProperty]
-    private bool similarVideosAvailable;
-
-    [ObservableProperty]
     private List<Comment> comments;
 
     public event EventHandler DownloadCompleted;
@@ -51,7 +48,6 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
                 var similarVideosSearchResult = await _appApiService.SearchVideos(TheVideo.Snippet.Tags.First(), "");
 
                 SimilarVideos = similarVideosSearchResult.Items;
-                SimilarVideosAvailable = (SimilarVideos?.Count > 0);
             }
 
             //Get Comments
@@ -82,6 +78,49 @@ public partial class VideoDetailsPageViewModel : AppViewModelBase
             SetDataLodingIndicators(false);
         }
     }
+
+    [RelayCommand]
+    private async Task UnlikeVideo()
+    {
+        await PageService.DisplayAlert("Coming Soon",
+            "The unlike option is coming soon, once we implement the OAuth login functionality.",
+            "OK");
+    }
+
+    [RelayCommand]
+    private async Task ShareVideo()
+    {
+        var textToShare =
+            $"Hey, I found this amazing video. check it out: https://www.youtube.com/watch?v={TheVideo.Id}";
+
+        //Share
+        await Share.RequestAsync(new ShareTextRequest
+        {
+            Text = textToShare,
+            Title = TheVideo.Snippet.Title
+        });
+    }
+
+    [RelayCommand]
+    private async Task DownloadVideo()
+    {
+    }
+
+    [RelayCommand]
+    private async Task SubscribeChannel()
+    {
+        await PageService.DisplayAlert(
+            "Coming Soon",
+            "The subscribe to channel option is coming soon, once we implement the OAuth login functionality.",
+            "OK");
+    }
+
+    [RelayCommand]
+    private async Task NavigateToVideoDetailsPage(string videoID)
+    {
+        await NavigationService.PushAsync(new VideoDetailsPage(videoID));
+    }
+
 
 }
 

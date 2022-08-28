@@ -97,7 +97,6 @@
                     x:DataType="models:YoutubeVideo">
 
                     <controls:VideoCell
-                        ParentContext="{Binding BindingContext, Source={x:Reference RootPage}}"
                         HorizontalOptions="Fill"
                         HeightRequest="{Binding ItemsHeight, Source={x:Reference RootPage}}"/>
 

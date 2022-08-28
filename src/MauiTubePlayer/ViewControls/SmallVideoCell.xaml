@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MauiTubePlayer.Models"
+    x:DataType="models:YoutubeVideo"
+    xmlns:viewmodels="clr-namespace:MauiTubePlayer.ViewModels"
+
+    x:Class="MauiTubePlayer.ViewControls.SmallVideoCell">
+
+    <Border
+        BackgroundColor="{StaticResource DarkColor}"
+        StrokeShape="RoundRectangle 8"
+        Padding="6"
+        WidthRequest="130">
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:VideoDetailsPageViewModel}}, Path=NavigateToVideoDetailsPageCommand, Mode=OneWay}"
+                CommandParameter="{Binding Id.VideoId}" />
+        </Border.GestureRecognizers>
+
+        <Grid
+            RowSpacing="6"
+            RowDefinitions="*,32">
+
+            <!-- Thumbnail -->
+            <Frame
+                Grid.Row="0"
+                HasShadow="True"
+                CornerRadius="6"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                IsClippedToBounds="True"
+                Padding="0"
+                Margin="0,0,2,2">
+                <Image
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    Aspect="AspectFill">
+                    <Image.Source>
+                        <UriImageSource
+                            Uri="{Binding Snippet.Thumbnails.Medium.Url, Mode=OneWay}"
+                            CacheValidity="1:00:00.0" />
+                    </Image.Source>
+                </Image>
+            </Frame>
+
+            <!-- Video Details -->
+            <Label
+                Style="{StaticResource RegularLightText12}"
+                Grid.Row="1"
+                LineBreakMode="WordWrap"
+                VerticalOptions="Fill"
+                MaxLines="2"
+                Text="{Binding Snippet.Title, Mode=OneWay}" />
+
+        </Grid>
+
+    </Border>
+
+</ContentView>
+

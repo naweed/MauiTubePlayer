@@ -22,3 +22,5 @@ global using Maui.Apps.Framework.Extensions;
 global using Microsoft.Maui.Controls.Compatibility.Hosting;
 global using YoutubeExplode;
 global using YoutubeExplode.Videos.Streams;
+global using System.IO;
+global using System.Net.Http;

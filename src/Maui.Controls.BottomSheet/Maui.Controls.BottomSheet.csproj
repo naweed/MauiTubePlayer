@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>disable</ImplicitUsings>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Platforms\Android\" />
+	  <None Remove="Platforms\iOS\" />
+	  <None Remove="Platforms\MacCatalyst\" />
+	  <None Remove="Platforms\Windows\" />
+	  <None Remove="icnmenuclose.png" />
+	  <None Remove="icnmenuclosedark.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Platforms\Android\" />
+	  <Folder Include="Platforms\iOS\" />
+	  <Folder Include="Platforms\MacCatalyst\" />
+	  <Folder Include="Platforms\Windows\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="BottomSheet.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Include="icnmenuclose.png">
+	    <LogicalName>XGENO.Maui.Controls.BottomSheet.icnmenuclose.png</LogicalName>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="icnmenuclosedark.png">
+	    <LogicalName>XGENO.Maui.Controls.BottomSheet.icnmenuclosedark.png</LogicalName>
+	  </EmbeddedResource>
+	</ItemGroup>
+</Project>

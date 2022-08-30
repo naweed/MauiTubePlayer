@@ -54,6 +54,9 @@ public static class MauiProgram
         //Register API Service
         services.AddSingleton<IApiService, YoutubeService>();
 
+        //Register FileDownloadService
+        services.AddSingleton<IDownloadFileService, FileDownloadService>();
+
         //Register View Models
         services.AddSingleton<StartPageViewModel>();
         services.AddTransient<VideoDetailsPageViewModel>();

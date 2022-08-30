@@ -376,6 +376,34 @@
                 Background="{StaticResource DarkColor}"
                 Clicked="btnComments_Clicked"/>
 
+            <!-- Progress Bar-->
+            <ContentView
+                IsVisible="{Binding IsDownloading, Mode=OneWay}"
+                Grid.Row="7"
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                BackgroundColor="{StaticResource PageBackgroundColor}"
+                Margin="0,0,0,16">
+
+                <VerticalStackLayout                
+                    Spacing="8"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Fill">
+
+                    <ProgressBar
+                        Progress="{Binding ProgressValue, Mode=OneWay}"
+                        HorizontalOptions="Fill"/>
+
+                    <Label
+                        Text="{Binding ProgressValue, Mode=OneWay, StringFormat='{0:P1}'}"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource RegularLightText14}" />
+
+                </VerticalStackLayout>
+
+            </ContentView>
+
+
 
             <!-- Comments Sheet -->
             <botshtcontrols:BottomSheet
